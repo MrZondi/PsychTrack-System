@@ -1,0 +1,42 @@
+﻿import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner sc=new Scanner(System.in);
+        String A=sc.next();
+        /* Enter your code here. Print output to STDOUT. */
+        A = A.toLowerCase();
+        if (ispalindrome(A)){
+            System.out.print("Yes");
+        }else{
+              System.out.print("No");
+        }
+     
+        
+    }
+    
+    public static boolean ispalindrome(String word){
+        //start
+        int begin = 0;\
+		//end
+        int end = word.length() - 1;
+		// read from start to end
+        while (begin < end){\
+		
+		//check if characters are the same at each position
+            if (word.charAt(begin) != word.charAt(end))
+                return false;
+			//increase the front
+                begin++;
+				//decrease the end
+                end--;
+        }
+        return true;
+    }
+}
+
+
+

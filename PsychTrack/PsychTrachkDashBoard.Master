@@ -1,0 +1,532 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="PsychTrachkDashBoard.master.cs" Inherits="PsychTrack.PsychTrachkDashBoard" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="utf-8">
+    <title>PsychTrack</title>
+    <meta name="keywords" content="Tell A Friend">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
+<meta name="author" content="WrapTheme, design by: ThemeMakker.com">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../assets/img/123icon.ico">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="../assets/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../assets/css/icofont.min.css">
+    <link rel="stylesheet" href="../assets/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../assets/css/jquery.typeahead.css">
+    <link rel="stylesheet" href="../assets/css/datatables.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="../assets/css/Chart.min.css">
+    <link rel="stylesheet" href="../assets/css/morris.css">
+    <link rel="stylesheet" href="../assets/css/leaflet.css">
+
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="../assets/vendor/fullcalendar/fullcalendar.min.css">
+<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/color_skins.css">
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="vertical-layout boxed">
+    <div class="app-loader main-loader">
+        <div class="loader-box">
+            <div class="bounceball"></div>
+            <div class="text">PsychTrack<span>Tell A Friend</span></div>
+        </div>
+    </div>
+    <!-- .main-loader -->
+
+    <div class="page-box">
+        <div class="app-container">
+            <!-- Horizontal navbar -->
+            <div id="navbar1" class="app-navbar horizontal">
+                <div class="navbar-wrap">
+
+                    <button class="no-style navbar-toggle navbar-open d-lg-none">
+                        <span></span><span></span><span></span>
+                    </button>
+
+
+                    <form class="app-search d-none d-md-block">
+                        <div class="form-group typeahead__container with-suffix-icon mb-0">
+                            <div class="typeahead__field">
+                                <div class="typeahead__query">
+                                    <input
+                                        class="form-control autocomplete-control topbar-search"
+                                        type="search"
+                                        placeholder="Search"
+                                        autocomplete="off"
+                                        data-source="../assets/data/search-menu.json">
+                                    <div class="suffix-icon icofont-search"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+
+                    <div class="app-actions">
+                        <div class="dropdown item">
+                            <button
+                                class="no-style dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-bs-offset="0, 12">
+                                <span class="icon icofont-notification"></span>
+                                <span class="badge badge-danger badge-sm">5</span>
+                            </button>
+
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-w-280">
+                                <div class="menu-header">
+                                    <h4 class="h5 menu-title mt-0 mb-0">Notifications</h4>
+
+                                    <a href="#" class="text-danger">Clear All</a>
+                                </div>
+
+
+                                <ul class="list">
+                                    <li>
+                                        <a href="#">
+                                            <span class="icon icofont-ui-message"></span>
+
+                                            <div class="content">
+                                                <span class="desc">You have a new message</span>
+                                                <span class="date">10 minutes ago</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="menu-footer">
+                                    <button class="btn btn-primary w-100">
+                                        View all notifications
+                   
+                                        <span class="btn-icon ms-2 icofont-tasks-alt"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dropdown item">
+                            <button
+                                class="no-style dropdown-toggle"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-bs-offset="0, 10">
+                                <span class="d-flex align-items-center">
+                                    <img src="data:image/png;base64,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" alt="" width="40" height="40" class="rounded-500 me-1">
+                                    <i class="icofont-simple-down"></i>
+                                </span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-w-180">
+                                <ul class="list">
+                                    <li>
+                                        <a href="./edit-account.html" class="align-items-center">
+                                            <span class="icon icofont-ui-home"></span>
+                                            Update account
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="./user-profile.html" class="align-items-center">
+                                            <span class="icon icofont-ui-user"></span>
+                                            View profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="calender.aspx" class="align-items-center">
+                                            <span class="icon icofont-ui-calendar"></span>
+                                            Calendar
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="align-items-center">
+                                            <span class="icon icofont-ui-settings"></span>
+                                            Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="sign-in.aspx" class="align-items-center">
+                                            <span class="icon icofont-logout"></span>
+                                            Log Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="navbar-skeleton horizontal">
+                        <div class="left-part d-flex align-items-center">
+                            <span class="navbar-button bg animated-bg d-lg-none"></span>
+                            <span class="sk-logo bg animated-bg d-none d-lg-block"></span>
+                            <span class="search d-none d-md-block bg animated-bg"></span>
+                        </div>
+
+                        <div class="right-part d-flex align-items-center">
+                            <div class="icon-box">
+                                <span class="icon bg animated-bg"></span>
+                                <span class="badge"></span>
+                            </div>
+                            <span class="avatar bg animated-bg"></span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <!-- end Horizontal navbar -->
+            <!-- Vertical navbar -->
+            <div id="navbar2" class="app-navbar vertical">
+                <div class="navbar-wrap">
+
+                    <button class="no-style navbar-toggle navbar-close icofont-close-line d-lg-none"></button>
+
+
+                    <div class="app-logo">
+                        <div class="logo-wrap">
+                            <!-- Image logo -->
+                            <img alt='' src='data:image/png;base64,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' />
+                            <!-- end Image logo -->
+                        </div>
+                    </div>
+
+
+                    <div class="main-menu">
+                        <nav class="main-menu-wrap">
+                            <ul class="menu-ul">
+                                <li class="menu-item">
+                                    <span class="group-title">PsychTrack</span>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="item-link" href="home.aspx">
+                                        <span class="link-icon icofont-home"></span>
+                                        <span class="link-text">Home</span>
+                                    </a>
+                                </li>
+                              
+                                <li class="menu-item">
+                                    <a class="item-link" href="patients.aspx">
+                                        <span class="link-icon icofont-chart-pie"></span>
+                                        <span class="link-text">CBT Room</span>
+                                    </a>
+                                </li>
+
+                                <li class="menu-item">
+                                    <a class="item-link" href="#">
+                                        <span class="link-icon icofont-ui-user"></span>
+                                        <span class="link-text">Update Profile</span>
+                                    </a>
+                                </li>
+
+                                  <li class="menu-item">
+                                    <a class="item-link" href="#">
+                                        <span class="link-icon icofont-logout"></span>
+
+                                        <span class="link-text">Sign out</span>
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </nav>
+                    </div>
+
+
+                    <div class="add-patient">
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-patient">
+                            <span class="btn-icon icofont-plus me-2"></span>
+                            Add Patient File
+                        </button>
+                    </div>
+
+
+                    <div class="assistant-menu">
+
+                        <a class="link" href="#">
+                            <span class="link-icon icofont-question-square"></span>PsyhTrack; T&Cs
+                        </a>
+                    </div>
+
+
+
+
+
+
+                    <div class="navbar-skeleton vertical">
+                        <div class="top-part">
+                            <div class="sk-logo bg animated-bg"></div>
+                            <div class="sk-menu">
+                                <span class="sk-menu-item menu-header bg-1 animated-bg"></span>
+                                <span class="sk-menu-item bg animated-bg w-75"></span>
+                                <span class="sk-menu-item bg animated-bg w-80"></span>
+                                <span class="sk-menu-item bg animated-bg w-50"></span>
+                                <span class="sk-menu-item bg animated-bg w-75"></span>
+                                <span class="sk-menu-item bg animated-bg w-50"></span>
+                                <span class="sk-menu-item bg animated-bg w-60"></span>
+                            </div>
+                            <div class="sk-menu">
+                                <span class="sk-menu-item menu-header bg-1 animated-bg"></span>
+                                <span class="sk-menu-item bg animated-bg w-60"></span>
+                                <span class="sk-menu-item bg animated-bg w-40"></span>
+                                <span class="sk-menu-item bg animated-bg w-60"></span>
+                                <span class="sk-menu-item bg animated-bg w-40"></span>
+                                <span class="sk-menu-item bg animated-bg w-40"></span>
+                                <span class="sk-menu-item bg animated-bg w-40"></span>
+                                <span class="sk-menu-item bg animated-bg w-40"></span>
+                            </div>
+                            <div class="sk-menu">
+                                <span class="sk-menu-item menu-header bg-1 animated-bg"></span>
+                                <span class="sk-menu-item bg animated-bg w-60"></span>
+                                <span class="sk-menu-item bg animated-bg w-50"></span>
+                            </div>
+                            <div class="sk-button animated-bg w-90"></div>
+                        </div>
+
+                        <div class="bottom-part">
+                            <div class="sk-menu">
+                                <span class="sk-menu-item bg-1 animated-bg w-60"></span>
+                                <span class="sk-menu-item bg-1 animated-bg w-80"></span>
+                            </div>
+                        </div>
+
+                        <div class="horizontal-menu">
+                            <span class="sk-menu-item bg animated-bg"></span>
+                            <span class="sk-menu-item bg animated-bg"></span>
+                            <span class="sk-menu-item bg animated-bg"></span>
+                            <span class="sk-menu-item bg animated-bg"></span>
+                            <span class="sk-menu-item bg animated-bg"></span>
+                            <span class="sk-menu-item bg animated-bg"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- end Vertical navbar -->
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+
+            <div class="app-footer">
+                <div class="footer-wrap">
+                    <div class="row h-100 align-items-center">
+                        <div class="col-12 col-md-6 d-none d-md-block">
+                            <ul class="page-breadcrumbs">
+
+                                <li class="item">
+                                    <a href="#" class="link">Page 1</a>
+
+                                    <i class="separator icofont-thin-right"></i>
+                                </li>
+
+                                <li class="item">
+                                    <a href="#" class="link">Page 2</a>
+
+                                    <i class="separator icofont-thin-right"></i>
+                                </li>
+
+                                <li class="item">
+                                    <a href="#" class="link">Page 3</a>
+
+                                    <i class="separator icofont-thin-right"></i>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="footer-skeleton">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md-6 d-none d-md-block">
+                                <ul class="page-breadcrumbs">
+                                    <li class="item bg-1 animated-bg"></li>
+                                    <li class="item bg animated-bg"></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-12 col-md-6">
+                                <div class="info justify-content-center justify-content-md-end">
+                                    <div class="version bg animated-bg"></div>
+                                    <div class="settings animated-bg"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-overlay"></div>
+        </div>
+    </div>
+
+    <!-- Add patients modals -->
+    <div class="modal fade" id="add-patient" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new patient file</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group avatar-box d-flex">
+                            <img src="../assets/content/anonymous-400.jpg" width="40" height="40" alt="" class="rounded-500 me-4">
+
+                            <button class="btn btn-outline-primary" type="button">
+                                Select file<span class="btn-icon icofont-ui-user ms-2"></span>
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="number" placeholder="Number">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="number" placeholder="Age">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker" title="Gender">
+                                        <option class="d-none">Gender</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <textarea class="form-control" placeholder="Condition" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-block">
+                    <div class="actions justify-content-between">
+                        <button type="button" class="btn btn-error" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info">Add file</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Add patients modals -->
+    </div>
+</div>
+
+
+    <!-- Add patients modals -->
+    <div class="modal fade" id="add-patient" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add new patient</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group avatar-box d-flex">
+                            <img src="../assets/content/anonymous-400.jpg" width="40" height="40" alt="" class="rounded-500 me-4">
+
+                            <button class="btn btn-outline-primary" type="button">
+                                Select image<span class="btn-icon icofont-ui-user ms-2"></span>
+                            </button>
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <input class="form-control" type="number" placeholder="Number">
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="number" placeholder="Age">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker" title="Gender">
+                                        <option class="d-none">Gender</option>
+                                        <option>Male</option>
+                                        <option>Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <textarea class="form-control" placeholder="Address" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer d-block">
+                    <div class="actions justify-content-between">
+                        <button type="button" class="btn btn-error" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info">Add patient</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Add patients modals -->
+
+    <script src="../assets/js/jquery-3.6.0.min.js"></script>
+    <script src="../assets/js/jquery-migrate-1.4.1.min.js"></script>
+    <script src="../assets/js/popper.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="../assets/js/jquery.typeahead.min.js"></script>
+    <script src="../assets/js/datatables.min.js"></script>
+    <script src="../assets/js/bootstrap-select.min.js"></script>
+    <script src="../assets/js/jquery.barrating.min.js"></script>
+    <script src="../assets/js/Chart.min.js"></script>
+    <script src="../assets/js/raphael-min.js"></script>
+    <script src="../assets/js/morris.min.js"></script>
+    <script src="../assets/js/echarts.min.js"></script>
+    <script src="../assets/js/echarts-gl.min.js"></script>
+
+    <script src="../assets/js/main.js"></script>
+
+     <!-- new -->
+    <script src="assets/bundles/libscripts.bundle.js"></script>
+<script src="assets/bundles/vendorscripts.bundle.js"></script>
+<script src="assets/bundles/fullcalendarscripts.bundle.js"></script>
+<script src="../assets/vendor/fullcalendar/fullcalendar.js"></script>
+<script src="assets/bundles/mainscripts.bundle.js"></script>
+<script src="assets/js/pages/calendar.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</body>
+</html>
