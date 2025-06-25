@@ -1,2 +1,2 @@
 # PsychTrack-System
-Final year UJ team prject
+Final year UJ team project
